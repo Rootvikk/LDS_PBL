@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Define the Employee structure
 typedef struct Employee {
     int id;
     char name[50];
@@ -12,9 +11,8 @@ typedef struct Employee {
     struct Employee* next;
 } Employee;
 
-Employee* head = NULL; // Head of the linked list
+Employee* head = NULL;
 
-// Function to create a new employee record
 Employee* createEmployee(int id, char name[], int age, char department[], float salary) {
     Employee* newEmployee = (Employee*)malloc(sizeof(Employee));
     if(newEmployee == NULL) {
@@ -30,7 +28,6 @@ Employee* createEmployee(int id, char name[], int age, char department[], float 
     return newEmployee;
 }
 
-// Function to add a new employee record
 void addEmployee() {
     int id, age;
     char name[50], department[50];
@@ -39,7 +36,7 @@ void addEmployee() {
     printf("Enter Employee ID: ");
     scanf("%d", &id);
     printf("Enter Employee Name: ");
-    scanf(" %[^\n]s", name); // Read string with spaces
+    scanf(" %[^\n]s", name);
     printf("Enter Age: ");
     scanf("%d", &age);
     printf("Enter Department: ");
@@ -49,14 +46,12 @@ void addEmployee() {
     
     Employee* newEmp = createEmployee(id, name, age, department, salary);
     
-    // Insert at beginning of the list
     newEmp->next = head;
     head = newEmp;
     
     printf("Employee added successfully!\n");
 }
 
-// Function to display all employee records
 void displayEmployees() {
     if (head == NULL) {
         printf("No employees found.\n");
@@ -74,7 +69,6 @@ void displayEmployees() {
     }
 }
 
-// Function to search for an employee by ID
 Employee* searchEmployee(int id) {
     Employee* temp = head;
     while(temp != NULL) {
@@ -85,7 +79,6 @@ Employee* searchEmployee(int id) {
     return NULL;
 }
 
-// Function to delete an employee record
 void deleteEmployee() {
     int id;
     printf("Enter Employee ID to delete: ");
@@ -93,7 +86,6 @@ void deleteEmployee() {
     
     Employee *temp = head, *prev = NULL;
     
-    // If head node holds the record to be deleted
     if(temp != NULL && temp->id == id) {
         head = temp->next;
         free(temp);
@@ -101,7 +93,6 @@ void deleteEmployee() {
         return;
     }
     
-    // Search for the record to be deleted
     while(temp != NULL && temp->id != id) {
         prev = temp;
         temp = temp->next;
@@ -112,13 +103,11 @@ void deleteEmployee() {
         return;
     }
     
-    // Unlink the node from the linked list
     prev->next = temp->next;
     free(temp);
     printf("Employee deleted successfully!\n");
 }
 
-// Function to display the menu and handle user choices
 void menu() {
     int choice;
     do {
@@ -162,7 +151,6 @@ void menu() {
     } while(choice != 5);
 }
 
-// Main function
 int main() {
     menu();
     return 0;
